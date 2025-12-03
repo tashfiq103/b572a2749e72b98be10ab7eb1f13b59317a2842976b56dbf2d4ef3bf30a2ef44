@@ -1,18 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MatchingCardSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    #region Public Variables
+
+    
+
+    #endregion
+
+    #region Internal Callback
+
+    private void SpawnMatchingCards()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    #endregion
+
+    #region Unity Callback
+
+    private void OnEnable()
     {
-        
+        GameManager.Instance.OnLevelDataLoadedEvent.RegisterEvent(this.gameObject, SpawnMatchingCards);
     }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnLevelDataLoadedEvent.UnregisterEvent(this.gameObject);
+    }
+
+    #endregion   
 }

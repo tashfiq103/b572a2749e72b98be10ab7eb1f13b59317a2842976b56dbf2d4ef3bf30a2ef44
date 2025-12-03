@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameEventData", menuName = "Data/GameEventData", order = -1)]
+[CreateAssetMenu(fileName = "GameEventData", menuName = "Data/GameEventData", order = 0)]
 public class GameEventData : ScriptableObject
 {
     #region Private Variables
