@@ -17,6 +17,10 @@ public class LevelDataEditor : Editor
 
     private SerializedProperty _gridData;
 
+    private Vector2 _scrollPosVertical;
+    private Vector2 _scrollPosHorizontal;
+
+
     #endregion
 
     #region  Internal Method
@@ -59,7 +63,6 @@ public class LevelDataEditor : Editor
             int matchDataIndex = Random.Range(0, _matchDatas.arraySize);
             MatchData matchData = _matchDatas.GetArrayElementAtIndex(matchDataIndex).objectReferenceValue as MatchData;
 
-            Debug.Log($"i = {i}, matchDataIndex = {matchDataIndex}");
 
             FillGridData(
                 gridIndices[Random.Range(0, gridIndices.Count)],
@@ -97,11 +100,71 @@ public class LevelDataEditor : Editor
 
         if(!EditorApplication.isPlaying)
         {
+            EditorGUILayout.Space(20);
+            EditorGUILayout.LabelField("========================", EditorStyles.boldLabel);
+            EditorGUILayout.Space(20);
             if(GUILayout.Button("Initialize Grid Data"))
             {
                 InitializeGridData();
             }
         }
+
+        EditorGUILayout.Space(20);
+        EditorGUILayout.LabelField("========================", EditorStyles.boldLabel);
+        EditorGUILayout.Space(20);
+
+        
+        _scrollPosVertical = EditorGUILayout.BeginScrollView(_scrollPosVertical);
+        {
+            _scrollPosHorizontal = EditorGUILayout.BeginScrollView(_scrollPosHorizontal);
+            {
+                int totalGridCount = _levelData.Row * _levelData.Column;
+                for(int row = 0; row < _levelData.Row; row++)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    {
+                        for(int column = 0; column < _levelData.Column; column++)
+                        {
+                            int gridIndex = row * _levelData.Column + column;
+
+                            if(gridIndex >= _gridData.arraySize)
+                            {
+                               if(GUILayout.Button(Texture2D.redTexture, GUILayout.Width(60), GUILayout.Height(60)))
+                                {
+                                    Debug.Log($"Clicked on Empty Grid ({row}, {column})");
+                                }
+                            }
+                            else
+                            {
+                                SerializedProperty gridDataElement = _gridData.GetArrayElementAtIndex(gridIndex);
+                            SerializedProperty matchDataProperty = gridDataElement.FindPropertyRelative("_matchData");
+
+                            if(matchDataProperty.objectReferenceValue == null)
+                            {
+                                if(GUILayout.Button(Texture2D.redTexture, GUILayout.Width(60), GUILayout.Height(60)))
+                                {
+                                    Debug.Log($"Clicked on Empty Grid ({row}, {column})");
+                                }
+                            }
+                            else
+                            {
+                                MatchData matchData = matchDataProperty.objectReferenceValue as MatchData;
+                                Texture2D texture = AssetPreview.GetAssetPreview(matchData.matchItemSprite);
+
+                                if(GUILayout.Button(texture, GUILayout.Width(60), GUILayout.Height(60)))
+                                {
+                                    Debug.Log($"Clicked on Grid ({row}, {column}) with Match Item: {matchData.matchItemName}");
+                                }
+                            }
+                            }
+                        }
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+            EditorGUILayout.EndScrollView();
+        }
+        EditorGUILayout.EndScrollView();
     }
 
     #endregion
