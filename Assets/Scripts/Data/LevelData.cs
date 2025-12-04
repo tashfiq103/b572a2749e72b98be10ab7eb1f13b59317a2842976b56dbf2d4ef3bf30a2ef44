@@ -221,6 +221,7 @@ public class LevelData : EnumData
     public int Row{get => _row;}
     public int Column{get => _column;}
     public MatchData[] MatchDatas{get => _matchDatas;}
+    public GridData[] GridDatas{get => _gridDatas;}
 
     #endregion
 

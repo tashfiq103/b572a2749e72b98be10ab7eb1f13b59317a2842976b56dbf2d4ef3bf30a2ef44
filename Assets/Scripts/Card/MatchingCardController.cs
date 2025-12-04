@@ -1,7 +1,8 @@
 
 using UnityEngine;
 using System;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Globalization;
 
 public class MatchingCardController : MonoBehaviour
 {
@@ -17,6 +18,14 @@ public class MatchingCardController : MonoBehaviour
 
     #endregion
 
+    #region Private Variables
+
+    private static readonly int _hasKey_Shader_DissolveProgress = Shader.PropertyToID("_Dissolve");
+
+    private Stack<MatchingCardComponent> _flippedCardsStack = new Stack<MatchingCardComponent>();
+
+    #endregion
+
     #region Internal Callback
 
     private void OnFlippedStartedCallback(MatchingCardComponent value)
@@ -26,7 +35,26 @@ public class MatchingCardController : MonoBehaviour
 
     private void OnFlippedEndedCallback(MatchingCardComponent value)
     {
-        
+        Debug.Log("Card Flipped Ended: " + value.CardMatchData.matchItemName, value.gameObject);
+        if(_flippedCardsStack.Count > 0)
+        {
+            if(_flippedCardsStack.Peek().CardMatchData == value.CardMatchData)
+            {
+                value.TryDissolve();
+                _flippedCardsStack.Pop().TryDissolve();
+            }
+            else
+            {
+                value.TryUnflip();
+                while(_flippedCardsStack.Count > 0)
+                {
+                    _flippedCardsStack.Pop().TryUnflip();
+                }
+            }
+        }else
+        {
+            _flippedCardsStack.Push(value);
+        }
     }
 
     private void OnUnflippedStartedCallback(MatchingCardComponent value)
@@ -47,7 +75,7 @@ public class MatchingCardController : MonoBehaviour
 
     private void OnDissolvingCallback(MatchingCardComponent value, float progression)
     {
-        
+        value.cardMeshRenderer.material.SetFloat(_hasKey_Shader_DissolveProgress, progression);
     }
 
     private void OnDissolvingCompletedCallback(MatchingCardComponent value)
@@ -73,6 +101,7 @@ public class MatchingCardController : MonoBehaviour
 
         OnUnflippedStartedEvent += OnUnflippedStartedCallback;
         OnUnflippedEndedEvent += OnUnflippedEndedCallback;
+
         OnDissolveStartedEvent += OnDissolveStartedCallback;
         OnDissolvingEvent += OnDissolvingCallback;
         OnDissolvingCompletedEvent += OnDissolvingCompletedCallback;

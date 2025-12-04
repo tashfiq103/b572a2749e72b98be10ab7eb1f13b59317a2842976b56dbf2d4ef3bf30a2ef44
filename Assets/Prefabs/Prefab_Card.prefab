@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1864249218534489470}
   - component: {fileID: 6636507666034902448}
-  - component: {fileID: 8508919837837248118}
+  - component: {fileID: 35258181}
   m_Layer: 0
   m_Name: Container_Mesh
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6207252612690376265}
   m_Father: {fileID: 477017446103651239}
@@ -55,7 +55,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8508919837837248118
+--- !u!114 &35258181
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshContainerTransform: {fileID: 1864249218534489470}
+  cardMeshRenderer: {fileID: 5075481470187441446}
   cardAnimator: {fileID: 6636507666034902448}
 --- !u!1001 &5885692479541023138
 PrefabInstance:
@@ -194,6 +195,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba26018c2fbe34934afa940fb8ce68d3, type: 3}
+--- !u!23 &5075481470187441446 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: ba26018c2fbe34934afa940fb8ce68d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5885692479541023138}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6207252612690376265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ba26018c2fbe34934afa940fb8ce68d3,

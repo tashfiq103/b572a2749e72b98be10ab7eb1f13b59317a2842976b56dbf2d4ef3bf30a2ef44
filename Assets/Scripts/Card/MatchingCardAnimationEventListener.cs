@@ -53,14 +53,21 @@ public class MatchingCardAnimationEventListener : MonoBehaviour
         {
             yield return null;
 
-            AnimatorStateInfo info = matchingCardComponent.cardAnimator.GetCurrentAnimatorStateInfo(0);
-            while(info.normalizedTime < 1.0f)
+            AnimatorStateInfo info  = matchingCardComponent.cardAnimator.GetCurrentAnimatorStateInfo(0);
+            float duration          = info.length / info.speed;
+            float remainingTime     = duration;
+            while(remainingTime > 0)
             {
-                yield return null;
-                _matchingCardController.OnDissolvingEvent?.Invoke(matchingCardComponent, info.normalizedTime);
+                float deltaTime = Time.deltaTime;
+                remainingTime -= deltaTime;
+                remainingTime = Mathf.Clamp(remainingTime, 0, duration);
+
+                float progress = 1 - (remainingTime / duration);
+                _matchingCardController.OnDissolvingEvent?.Invoke(matchingCardComponent, progress);
+
+                yield return new WaitForSeconds(deltaTime);
             }
             
-            _matchingCardController.OnDissolvingEvent?.Invoke(matchingCardComponent, 1f);
         }
 
         StartCoroutine(DissolveProgress());
