@@ -9,6 +9,13 @@ using UnityEditor;
 [RequireComponent(typeof(CinemachineVirtualCamera))]
 public class MatchingBoardCamera : MonoBehaviour
 {
+    #region Public Variables
+
+    [Range(0f, 2f)]
+    public float additionalPaddingOnOrthographicSize = 1.0f;
+
+    #endregion
+
     #region Internal Function
 
     public static Vector2 GetEditorGameViewSize()
@@ -34,34 +41,31 @@ public class MatchingBoardCamera : MonoBehaviour
         float cellSizeX = GameManager.Instance.matchingCardSpawner.cardHorizontalSpacing;
         float cellSizeY = GameManager.Instance.matchingCardSpawner.cardVerticalSpacing;
 
-        float gridWidth  = columns * cellSizeX;
-        float gridHeight = rows * cellSizeY;
+
+        /*
+        When it is about to overlow, calculating how much of orthograpgic size would be taken to fit the whole grid in the view
+        and adding that to the orthographic size. For the landscape mode, if the columns are more than rows, you would start seeing spaces are coming on top-bottom due to aspect ratino,
+        vice versa for portrait mode.
+        */
 
         Vector2 screenSize   = GetEditorGameViewSize();
 
         bool isPortrait     = screenSize.y >= screenSize.x ? true : false;
-        float aspectRatioMax= (float) Mathf.Max(screenSize.x, screenSize.y) / Mathf.Min(screenSize.x, screenSize.y);
-        float aspectRatioMin= (float) Mathf.Min(screenSize.x, screenSize.y) / Mathf.Max(screenSize.x, screenSize.y);
-        Debug.Log($"Screen Width : {screenSize.x} | Screen Height : {screenSize.y} | Aspect Ratio : {aspectRatioMax} | isPortrait : {isPortrait} | Grid Width : {gridWidth} | Grid Height : {gridHeight}");
+        float aspectRatio= (float) Mathf.Max(screenSize.x, screenSize.y) / Mathf.Min(screenSize.x, screenSize.y);
+        
         if(isPortrait)
         {
             //Portrait
-            gridWidth           = columns * cellSizeX;
-            gridHeight          = gridWidth * aspectRatioMax;
+            float gridWidth           = columns * cellSizeX;
+            float gridHeight          = gridWidth * aspectRatio;
 
             int rowThreshold = Mathf.FloorToInt(gridHeight / cellSizeY);
-            Debug.Log($"Portrait Mode - Row Threshold : {rowThreshold} | Rows : {rows} | gridWidth : {gridWidth} | gridHeight : {gridHeight}");
             if(rows > columns)
             {
-                if(rows <= rowThreshold)
-                {
-                    
-                }
-                else
+                if(rows > rowThreshold)
                 {
                     orthoSize += (rows - rowThreshold) * (1f / rowThreshold) * (gridHeight / 2f);
                 }
-
                 orthoSize += gridHeight / 2f;
             }
             else
@@ -73,18 +77,14 @@ public class MatchingBoardCamera : MonoBehaviour
         {
             //Landscape
 
-            gridHeight          = rows * cellSizeY;
-            gridWidth           = gridHeight * aspectRatioMax;
+            float gridHeight          = rows * cellSizeY;
+            float gridWidth           = gridHeight * aspectRatio;
 
             if(columns > rows)
             {
                 
                 int columnThreshold = Mathf.FloorToInt(gridWidth / cellSizeX);
-                Debug.Log($"Landscape Mode - Column Threshold : {columnThreshold} | Columns : {columns} | gridWidth : {gridWidth} | gridHeight : {gridHeight}");
-                if(columns <= columnThreshold)
-                {
-                }
-                else
+                if(columns > columnThreshold)
                 {
                     orthoSize += (columns - columnThreshold) * (1f / columnThreshold) * (gridHeight / 2f);
                 }
@@ -98,7 +98,7 @@ public class MatchingBoardCamera : MonoBehaviour
         }
 
 
-        gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = orthoSize;
+        gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = orthoSize + additionalPaddingOnOrthographicSize;
 
         
     }

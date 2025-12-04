@@ -98,16 +98,26 @@ public class LevelDataEditor : Editor
     {
         DrawDefaultInspector();
 
+        int gridCount = _levelData.Row * _levelData.Column;
+        if((gridCount) % 2 != 0)
+        {
+            EditorGUILayout.Space(10);
+            EditorGUILayout.HelpBox($"Total Grid Count must be even number! GridCount = {gridCount}", MessageType.Error);
+            return;
+        }   
+
         if(!EditorApplication.isPlaying)
         {
             EditorGUILayout.Space(20);
             EditorGUILayout.LabelField("========================", EditorStyles.boldLabel);
             EditorGUILayout.Space(20);
-            if(GUILayout.Button("Initialize Grid Data"))
+            if(GUILayout.Button($"Initialize Grid Data for ({_levelData.Row} x {_levelData.Column}) | TotalGrid : {gridCount}"))
             {
                 InitializeGridData();
             }
         }
+
+        
 
         EditorGUILayout.Space(20);
         EditorGUILayout.LabelField("========================", EditorStyles.boldLabel);
