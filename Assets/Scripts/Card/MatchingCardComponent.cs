@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
@@ -40,6 +42,7 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
 
 
     private static readonly int _hashKey_Shader_BaseMap = Shader.PropertyToID("_BaseMap");
+    private static readonly int _hasKey_Shader_DissolveProgress = Shader.PropertyToID("_Dissolve");
 
     #endregion
 
@@ -112,11 +115,42 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
     
     
 
-    public bool TryDissolve()
+    public bool TryDissolve(Action<MatchingCardComponent, float> OnDissolving, Action<MatchingCardComponent> OnDissolveComplete)
     {
         if(CardState == CardStates.FrontFaced)
         {
             ChangeCardState(CardStates.Dissolving);
+
+            IEnumerator DissolveProgress()
+            {
+                yield return null;
+                yield return null;
+                yield return null;
+
+                AnimatorStateInfo info  = cardAnimator.GetCurrentAnimatorStateInfo(0);
+                float duration          = info.length / info.speed;
+                float remainingTime     = duration;
+                while(remainingTime > 0)
+                {
+                    float deltaTime = Time.deltaTime;
+                    remainingTime -= deltaTime;
+                    remainingTime = Mathf.Clamp(remainingTime, 0, duration);
+
+                    float progress = 1 - (remainingTime / duration);
+                    cardMeshRenderer.material.SetFloat(_hasKey_Shader_DissolveProgress, progress);
+
+
+                    OnDissolving?.Invoke(this, progress);
+
+                    yield return new WaitForSeconds(deltaTime);
+                }
+
+                OnDissolveComplete?.Invoke(this);
+                ChangeCardState(CardStates.Matched);
+            }
+
+            StartCoroutine(DissolveProgress());
+
             return true;
         }
 
@@ -128,17 +162,6 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
         if(CardState == CardStates.FrontFaced)
         {
             ChangeCardState(CardStates.BackFaced);
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool TryMatched()
-    {
-        if(CardState == CardStates.Dissolving)
-        {
-            ChangeCardState(CardStates.Matched);
             return true;
         }
 

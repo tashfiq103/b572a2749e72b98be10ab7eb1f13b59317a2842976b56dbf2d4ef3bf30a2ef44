@@ -1,12 +1,16 @@
 
 using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 
 public class MatchingCardController : MonoBehaviour
 {
     #region  Public Variables
+
+    public int Score{get; private set;} = 0;
+    public int ComboStack {get; private set;} = 1;
+
 
     public  Action<MatchingCardComponent> OnFlippedStartedEvent;
     public  Action<MatchingCardComponent> OnFlippedEndedEvent;
@@ -16,17 +20,30 @@ public class MatchingCardController : MonoBehaviour
     public  Action<MatchingCardComponent, float> OnDissolvingEvent;
     public  Action<MatchingCardComponent> OnDissolvingCompletedEvent;
 
+
+    public event Action<int> OnScoreUpdatedEvent;
+    public event Action<int> OnComboStackUpdatedEvent;
+
     #endregion
 
     #region Private Variables
-
-    private static readonly int _hasKey_Shader_DissolveProgress = Shader.PropertyToID("_Dissolve");
 
     private Stack<MatchingCardComponent> _flippedCardsStack = new Stack<MatchingCardComponent>();
 
     #endregion
 
     #region Internal Callback
+
+    private void OnLevelStartedCallback()
+    {
+        Score       = 0;
+        ComboStack  = 1;
+    }
+
+    private void OnLevelEndedCallback()
+    {
+        
+    }
 
     private void OnFlippedStartedCallback(MatchingCardComponent value)
     {
@@ -35,13 +52,16 @@ public class MatchingCardController : MonoBehaviour
 
     private void OnFlippedEndedCallback(MatchingCardComponent value)
     {
-        Debug.Log("Card Flipped Ended: " + value.CardMatchData.matchItemName, value.gameObject);
         if(_flippedCardsStack.Count > 0)
         {
             if(_flippedCardsStack.Peek().CardMatchData == value.CardMatchData)
             {
-                value.TryDissolve();
-                _flippedCardsStack.Pop().TryDissolve();
+                value.TryDissolve(OnDissolvingEvent, OnDissolvingCompletedEvent);
+                _flippedCardsStack.Pop().TryDissolve(OnDissolvingEvent, OnDissolvingCompletedEvent);
+
+                Score += 2 * ComboStack;
+                OnScoreUpdatedEvent?.Invoke(Score);
+                ComboStack++;
             }
             else
             {
@@ -50,7 +70,11 @@ public class MatchingCardController : MonoBehaviour
                 {
                     _flippedCardsStack.Pop().TryUnflip();
                 }
+
+                ComboStack = 1;
             }
+
+            OnComboStackUpdatedEvent?.Invoke(ComboStack);
         }else
         {
             _flippedCardsStack.Push(value);
@@ -75,15 +99,12 @@ public class MatchingCardController : MonoBehaviour
 
     private void OnDissolvingCallback(MatchingCardComponent value, float progression)
     {
-        value.cardMeshRenderer.material.SetFloat(_hasKey_Shader_DissolveProgress, progression);
+        
     }
 
     private void OnDissolvingCompletedCallback(MatchingCardComponent value)
     {
-       if(value.TryMatched())
-        {
-            
-        }
+      
     }
 
 
@@ -91,7 +112,6 @@ public class MatchingCardController : MonoBehaviour
 
     #region Private Variables
 
-    private MatchData _currenMatchData = null;
 
     #endregion
 
@@ -99,6 +119,9 @@ public class MatchingCardController : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManager.Instance.OnLevelStartedEvent.RegisterEvent(gameObject, OnLevelStartedCallback);
+        GameManager.Instance.OnLevelEndedEvent.RegisterEvent(gameObject, OnLevelEndedCallback);
+
         OnFlippedStartedEvent += OnFlippedStartedCallback;
         OnFlippedEndedEvent += OnFlippedEndedCallback;
 
@@ -112,6 +135,9 @@ public class MatchingCardController : MonoBehaviour
 
     private void OnDisable()
     {
+        GameManager.Instance.OnLevelStartedEvent.UnregisterEvent(gameObject);
+        GameManager.Instance.OnLevelEndedEvent.UnregisterEvent(gameObject);
+
         OnFlippedStartedEvent -= OnFlippedStartedCallback;
         OnFlippedEndedEvent -= OnFlippedEndedCallback;
 
