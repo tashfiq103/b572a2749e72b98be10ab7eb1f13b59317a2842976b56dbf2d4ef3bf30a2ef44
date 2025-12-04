@@ -31,8 +31,10 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
 
     #region Private Variabls
 
+
     private static int _hasKey_Animation_Flip = Animator.StringToHash("Flip");
     private static int _hasKey_Animation_Unflip = Animator.StringToHash("Unflip");
+    private static int _hasKey_Animation_Dissolve = Animator.StringToHash("Dissolve");
 
     #endregion
 
@@ -42,6 +44,15 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
     {
         CardState = newState;
         OnCardStateChangedEvent?.Invoke(CardState);
+    }
+
+    #endregion
+
+    #region Unity Method
+
+    private void Awake()
+    {
+        
     }
 
     #endregion
@@ -58,9 +69,27 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
                 cardAnimator.SetTrigger(_hasKey_Animation_Flip);
                 Debug.Log("Card Flipped to Front", gameObject);
                 break;
+
             case CardStates.FrontFaced:
+                ChangeCardState(CardStates.BackFaced);
+                cardAnimator.SetTrigger(_hasKey_Animation_Unflip);
                 //Flip to Back
                 break;
+
+            case CardStates.Dissolving:
+            
+                cardAnimator.SetTrigger(_hasKey_Animation_Dissolve);
+                Debug.Log("Card Dissolving", gameObject);
+            break;
+        }
+    }
+
+    public void Dissolve()
+    {
+        if(CardState == CardStates.FrontFaced)
+        {
+            ChangeCardState(CardStates.Dissolving);
+            
         }
     }
 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1864249218534489470}
   - component: {fileID: 6636507666034902448}
+  - component: {fileID: 8508919837837248118}
   m_Layer: 0
   m_Name: Container_Mesh
   m_TagString: Untagged
@@ -43,7 +44,7 @@ Animator:
   m_GameObject: {fileID: 5102883451125898560}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cc9a5ed85a7be40cdbf87d5f094d6824, type: 2}
+  m_Controller: {fileID: 9100000, guid: ef4b0303e76ee42c9825758ac18626d5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -54,6 +55,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8508919837837248118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102883451125898560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432cf6df32fee419d909babbaec1b37e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matchingCardComponent: {fileID: 2800211478932323828}
 --- !u!1 &5152231479603974421
 GameObject:
   m_ObjectHideFlags: 0
