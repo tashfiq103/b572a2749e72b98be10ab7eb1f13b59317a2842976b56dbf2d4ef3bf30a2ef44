@@ -161,6 +161,9 @@ MonoBehaviour:
   - _row: 6
     _column: 6
     _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
+  levelScene:
+    scenePath: Assets/Scenes/GameScene.unity
+    sceneName: GameScene
   _row: 7
   _column: 7
   _matchDatas:

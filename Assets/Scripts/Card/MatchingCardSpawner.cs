@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MatchingCardSpawner : MonoBehaviour
@@ -16,7 +17,25 @@ public class MatchingCardSpawner : MonoBehaviour
 
     private void SpawnMatchingCards()
     {
-        
+        LevelData levelData = GameManager.Instance.LevelContainerDataReference.CurrentLevelDataReference;
+        float rowPosition = -((levelData.Row - 1) * cardVerticalSpacing) / 2;
+        for(int row = 0; row < levelData.Row; row++)
+        {
+            float columnPosition = -((levelData.Column - 1) * cardHorizontalSpacing) / 2;
+            for(int column = 0; column < levelData.Column; column++)
+            {
+                
+                Vector3 spawnPosition = new Vector3(
+                    columnPosition,
+                    0,
+                    rowPosition
+                );
+                columnPosition += cardHorizontalSpacing;
+                GameObject cardObject = Instantiate(cardPrefab, spawnPosition, Quaternion.identity, cardParentTransform);
+                // Additional setup for the card can be done here using levelData.MatchDatas
+            }
+            rowPosition += cardVerticalSpacing;
+        }
     }
 
     #endregion

@@ -13,6 +13,20 @@ public class LevelContainerData : ScriptableObject
         }
     }
 
+    public LevelData CurrentLevelDataReference
+    {
+        get
+        {
+            if(levelDatas.Length > 0)
+            {
+                int levelIndex = Mathf.Clamp(LevelIndex, 0, levelDatas.Length - 1);
+                return levelDatas[levelIndex];
+            }
+            
+            return null;
+        }
+    }
+
     public LevelData[] levelDatas;
 
     #endregion
