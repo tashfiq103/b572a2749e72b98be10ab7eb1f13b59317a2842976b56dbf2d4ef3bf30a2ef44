@@ -221,9 +221,9 @@ public class LevelData : EnumData
     public SceneReference levelScene;
 
     [Space(25)]
-    [Range(2, 10)]
+    [Range(2, 15)]
     [SerializeField] private int _row = 2;
-    [Range(2, 10)]
+    [Range(2, 15)]
     [SerializeField] private int _column = 2;
 
     [Space(25)]

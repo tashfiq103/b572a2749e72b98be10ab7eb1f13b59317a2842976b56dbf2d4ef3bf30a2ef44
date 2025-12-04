@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     public LevelContainerData LevelContainerDataReference{get => _levelContainerData;}
     
+    [Header("Managers")]
+    public MatchingCardSpawner matchingCardSpawner;
 
     [Header("Event")]
     public GameEventData OnLevelDataLoadedEvent;

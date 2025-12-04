@@ -168,7 +168,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5885692479541023138}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &9100514780009606646
+--- !u!65 &1120385279516728832
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
