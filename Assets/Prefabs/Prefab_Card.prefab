@@ -149,6 +149,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mesh_Card
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ba26018c2fbe34934afa940fb8ce68d3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba26018c2fbe34934afa940fb8ce68d3, type: 3}
 --- !u!4 &6207252612690376265 stripped

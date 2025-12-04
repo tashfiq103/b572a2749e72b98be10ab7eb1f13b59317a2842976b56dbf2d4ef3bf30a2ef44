@@ -19,43 +19,19 @@ MonoBehaviour:
     _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
   - _row: 0
     _column: 1
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
+    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
   - _row: 0
     _column: 2
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 0
-    _column: 3
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 0
-    _column: 4
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 0
-    _column: 5
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 0
-    _column: 6
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
+    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
   - _row: 1
     _column: 0
     _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
   - _row: 1
     _column: 1
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 1
-    _column: 2
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
+    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
   - _row: 1
     _column: 1
     _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 1
-    _column: 4
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 1
-    _column: 5
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 1
-    _column: 6
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
   - _row: 2
     _column: 0
     _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
@@ -65,107 +41,11 @@ MonoBehaviour:
   - _row: 2
     _column: 2
     _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 2
-    _column: 3
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 2
-    _column: 4
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 2
-    _column: 5
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 2
-    _column: 6
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 3
-    _column: 0
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 3
-    _column: 1
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 3
-    _column: 2
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 3
-    _column: 3
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 3
-    _column: 4
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 3
-    _column: 5
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 3
-    _column: 6
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 4
-    _column: 0
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 4
-    _column: 1
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 4
-    _column: 2
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 4
-    _column: 3
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 4
-    _column: 4
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 4
-    _column: 5
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 4
-    _column: 6
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 5
-    _column: 0
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 5
-    _column: 1
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 5
-    _column: 2
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 5
-    _column: 3
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 5
-    _column: 4
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 5
-    _column: 5
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 5
-    _column: 6
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 6
-    _column: 0
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 6
-    _column: 1
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 6
-    _column: 2
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - _row: 6
-    _column: 3
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 6
-    _column: 4
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 6
-    _column: 5
-    _matchData: {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
-  - _row: 6
-    _column: 6
-    _matchData: {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
   levelScene:
     scenePath: Assets/Scenes/GameScene.unity
     sceneName: GameScene
-  _row: 7
-  _column: 7
+  _row: 3
+  _column: 3
   _matchDatas:
   - {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
   - {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}

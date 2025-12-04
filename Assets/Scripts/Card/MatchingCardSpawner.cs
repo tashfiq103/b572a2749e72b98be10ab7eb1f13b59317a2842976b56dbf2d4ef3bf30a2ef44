@@ -31,7 +31,8 @@ public class MatchingCardSpawner : MonoBehaviour
                     rowPosition
                 );
                 columnPosition += cardHorizontalSpacing;
-                GameObject cardObject = Instantiate(cardPrefab, spawnPosition, Quaternion.identity, cardParentTransform);
+                GameObject cardObject = Instantiate(cardPrefab, cardParentTransform);
+                cardObject.transform.localPosition = spawnPosition;
                 // Additional setup for the card can be done here using levelData.MatchDatas
             }
             rowPosition += cardVerticalSpacing;
