@@ -67,6 +67,7 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
 
             case CardStates.Matched:
                 //Handle Matched State
+                Destroy(gameObject);
                 break;
         }
         OnCardStateChangedEvent?.Invoke(CardState);
@@ -127,6 +128,17 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
         if(CardState == CardStates.FrontFaced)
         {
             ChangeCardState(CardStates.BackFaced);
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool TryMatched()
+    {
+        if(CardState == CardStates.Dissolving)
+        {
+            ChangeCardState(CardStates.Matched);
             return true;
         }
 

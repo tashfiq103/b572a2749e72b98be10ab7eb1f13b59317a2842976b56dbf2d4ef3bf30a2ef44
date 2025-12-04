@@ -80,7 +80,10 @@ public class MatchingCardController : MonoBehaviour
 
     private void OnDissolvingCompletedCallback(MatchingCardComponent value)
     {
-       
+       if(value.TryMatched())
+        {
+            
+        }
     }
 
 

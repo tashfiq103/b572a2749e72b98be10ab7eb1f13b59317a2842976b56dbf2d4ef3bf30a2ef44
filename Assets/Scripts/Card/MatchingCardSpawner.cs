@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using System;
+using System.Collections;
 public class MatchingCardSpawner : MonoBehaviour
 {
 
@@ -18,32 +19,41 @@ public class MatchingCardSpawner : MonoBehaviour
 
     private void SpawnMatchingCards()
     {
-        GameManager gameManager = GameManager.Instance;
-        LevelData levelData = gameManager.LevelContainerDataReference.CurrentLevelDataReference;
-        float rowPosition = -((levelData.Row - 1) * cardVerticalSpacing) / 2;
-        for(int row = 0; row < levelData.Row; row++)
+        IEnumerator SpawnProcess()
         {
-            float columnPosition = -((levelData.Column - 1) * cardHorizontalSpacing) / 2;
-            for(int column = 0; column < levelData.Column; column++)
+            GameManager gameManager = GameManager.Instance;
+            LevelData levelData = gameManager.LevelContainerDataReference.CurrentLevelDataReference;
+            float rowPosition = ((levelData.Row - 1) * cardVerticalSpacing) / 2;
+            for(int row = 0; row < levelData.Row; row++)
             {
+                float columnPosition = -((levelData.Column - 1) * cardHorizontalSpacing) / 2;
+                for(int column = 0; column < levelData.Column; column++)
+                {
                 
-                Vector3 spawnPosition = new Vector3(
-                    columnPosition,
-                    0,
-                    rowPosition
-                );
-                columnPosition += cardHorizontalSpacing;
-                GameObject cardObject = Instantiate(cardPrefab.gameObject, cardParentTransform);
-                cardObject.transform.localPosition = spawnPosition;
-                // Additional setup for the card can be done here using levelData.MatchDatas
+                    Vector3 spawnPosition = new Vector3(
+                        columnPosition,
+                        0,
+                        rowPosition
+                    );
+                    columnPosition += cardHorizontalSpacing;
+                    GameObject cardObject = Instantiate(cardPrefab.gameObject, cardParentTransform);
+                    cardObject.transform.localPosition = spawnPosition;
+                    // Additional setup for the card can be done here using levelData.MatchDatas
 
-                int dataIndex = row * levelData.Column + column;
-                cardObject.GetComponent<MatchingCardComponent>().Initialize(
-                    gameManager.LevelContainerDataReference.CurrentLevelDataReference.GridDatas[dataIndex].MatchDataReference
-                );
+                    int dataIndex = row * levelData.Column + column;
+                    cardObject.GetComponent<MatchingCardComponent>().Initialize(
+                        gameManager.LevelContainerDataReference.CurrentLevelDataReference.GridDatas[dataIndex].MatchDataReference
+                    );
+
+                    yield return null;
+                    yield return null;
+                }
+                rowPosition -= cardVerticalSpacing;
             }
-            rowPosition += cardVerticalSpacing;
         }
+
+        StartCoroutine(SpawnProcess());
+        
     }
 
     #endregion
