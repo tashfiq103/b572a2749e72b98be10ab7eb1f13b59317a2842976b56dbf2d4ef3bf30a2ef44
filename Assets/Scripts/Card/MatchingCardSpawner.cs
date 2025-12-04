@@ -5,7 +5,10 @@ public class MatchingCardSpawner : MonoBehaviour
 
     #region Public Variables
 
-    
+    public GameObject cardPrefab;
+    public Transform cardParentTransform;
+    public float cardHorizontalSpacing = 2.0f;
+    public float cardVerticalSpacing = 3.0f;
 
     #endregion
 
@@ -23,6 +26,11 @@ public class MatchingCardSpawner : MonoBehaviour
     private void OnEnable()
     {
         GameManager.Instance.OnLevelDataLoadedEvent.RegisterEvent(this.gameObject, SpawnMatchingCards);
+    }
+
+    private void Start()
+    {
+        //Debug Call For Loading Level Data and Start Leveling
     }
 
     private void OnDisable()

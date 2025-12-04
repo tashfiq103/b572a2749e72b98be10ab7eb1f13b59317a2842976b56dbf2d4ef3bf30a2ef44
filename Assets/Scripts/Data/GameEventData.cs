@@ -2,6 +2,27 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+
+using UnityEditor;
+
+[CustomEditor(typeof(GameEventData))]
+public class GameEventDataEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        GameEventData gameEventData = (GameEventData)target;
+        if(GUILayout.Button("Trigger Event"))
+        {
+            gameEventData.TriggerEvent();
+        }
+    }
+}
+
+#endif
+
 [CreateAssetMenu(fileName = "GameEventData", menuName = "Data/GameEventData", order = 0)]
 public class GameEventData : ScriptableObject
 {

@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
-
 #if UNITY_EDITOR
 using UnityEditor;
 
@@ -27,6 +25,8 @@ public class LevelDataEditor : Editor
 
     private void FillGridData(int gridIndex, MatchData matchData, ref List<int> gridIndices)
     {
+
+
 
         SerializedProperty _gridData_row = _gridData.GetArrayElementAtIndex(gridIndex).FindPropertyRelative("_row");
         _gridData_row.intValue = gridIndex / _levelData.Column;
@@ -218,6 +218,9 @@ public class LevelData : EnumData
 
     [SerializeField, HideInInspector] private GridData[] _gridDatas;
 
+    public SceneReference levelScene;
+
+    [Space(25)]
     [Range(2, 10)]
     [SerializeField] private int _row = 2;
     [Range(2, 10)]
@@ -227,7 +230,7 @@ public class LevelData : EnumData
     [SerializeField] private MatchData[] _matchDatas;
 
 
-
+    
 
 
 }
