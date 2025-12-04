@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1864249218534489470}
+  - component: {fileID: 6636507666034902448}
   m_Layer: 0
   m_Name: Container_Mesh
   m_TagString: Untagged
@@ -32,6 +33,27 @@ Transform:
   m_Father: {fileID: 477017446103651239}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!95 &6636507666034902448
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102883451125898560}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc9a5ed85a7be40cdbf87d5f094d6824, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5152231479603974421
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e28812725fb84d9cb32456f0b4e7a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshContainerTransform: {fileID: 1864249218534489470}
+  cardAnimator: {fileID: 6636507666034902448}
 --- !u!1001 &5885692479541023138
 PrefabInstance:
   m_ObjectHideFlags: 0
