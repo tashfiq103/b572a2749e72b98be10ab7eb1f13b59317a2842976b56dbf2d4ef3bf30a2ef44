@@ -21,6 +21,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BackBaseMap:
+        m_Texture: {fileID: 2800000, guid: 64e6ea3c2d78348e0abd39391570fc5a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: a60996e85b85b40ffb9657839272f56d, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -80,18 +84,21 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _BaseMapSize: 0.2
+    - _BaseMapSize: 0.114
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DIssolveRimSize: 0.0401
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Dissolve: 0
+    - _DissolveScale: 5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FersnalPower: 0.5
+    - _FersnalPower: 1.15
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -117,10 +124,11 @@ Material:
     - _BackFaceColor02: {r: 0, g: 0.26701546, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DissolveColor: {r: 2.828427, g: 1.3864839, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FrontFaceColor01: {r: 0.36056846, g: 1, b: 0, a: 1}
+    - _FrontFaceColor01: {r: 1, g: 0.22431123, b: 0, a: 1}
     - _FrontFaceColor02: {r: 0, g: 0.26701546, b: 1, a: 1}
-    - _OutlineColor: {r: 1, g: 0.47641504, b: 0.956819, a: 1}
+    - _OutlineColor: {r: 0.74315536, g: 1.5306783, b: 2.828427, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3858095285875849840
