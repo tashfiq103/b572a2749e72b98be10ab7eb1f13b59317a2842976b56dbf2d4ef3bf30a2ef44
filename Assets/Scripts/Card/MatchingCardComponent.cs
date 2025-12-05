@@ -28,9 +28,14 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
 
     public event Action<CardStates> OnCardStateChangedEvent;
 
+    [Header("External Reference")]
     public Transform meshContainerTransform;
     public MeshRenderer cardMeshRenderer;
     public Animator cardAnimator;
+
+    [Header("SoundFX Reference")]
+    public SoundFXPlayer cardFlipSoundFX;
+    public SoundFXPlayer cardUnflipSoundFX;
 
     #endregion
 
@@ -89,10 +94,12 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
         {
             case CardStates.BackFaced:
                 ChangeCardState(CardStates.FrontFaced);
+                cardFlipSoundFX.TryPlaySound();
                 break;
 
             case CardStates.FrontFaced:
                 ChangeCardState(CardStates.BackFaced);
+                cardUnflipSoundFX.TryPlaySound();
                 break;
         }
     }
