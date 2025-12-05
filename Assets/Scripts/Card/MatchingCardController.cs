@@ -26,8 +26,13 @@ public class MatchingCardController : MonoBehaviour
     public event Action<int> OnComboStackUpdatedEvent;
     public event Action<float, float> OnTimerUpdatedEvent;
 
+    [Header("SoundFX")]
     public SoundFXFeedback soundFXOnCardMatched;
     public SoundFXFeedback soundFXOnCardMissMatched;
+
+    [Space(25)]
+    public SoundFXFeedback soundFXOnLevelComplete;
+    public SoundFXFeedback soundFXOnLevelFailed;
 
     #endregion
 
@@ -101,6 +106,12 @@ public class MatchingCardController : MonoBehaviour
     private void OnLevelCompletedCallback()
     {
         DataManager.Instance.LevelDataContainerReference.UpdateNextLevelIndex();
+        soundFXOnLevelComplete.TryPlaySound();
+    }
+
+    private void OnLevelFailedCallback()
+    {
+        soundFXOnLevelFailed.TryPlaySound();
     }
 
     private void OnFlippedStartedCallback(MatchingCardComponent value)
@@ -171,8 +182,14 @@ public class MatchingCardController : MonoBehaviour
         if(GameManager.Instance.IsGameRunning
         && _numberOfCardMatched == DataManager.Instance.LevelDataContainerReference.CurrentLevelDataReference.GridDatas.Length)
         {
-            GameManager.Instance.OnLevelEndedEvent.TriggerEvent();
-            GameManager.Instance.OnLevelCompletedEvent.TriggerEvent();
+            IEnumerator Delay()
+            {
+                GameManager.Instance.OnLevelEndedEvent.TriggerEvent();
+                yield return new WaitForSeconds(.5f);
+                GameManager.Instance.OnLevelCompletedEvent.TriggerEvent();
+            }
+            
+            StartCoroutine(Delay());
         }
     }
 
@@ -198,6 +215,7 @@ public class MatchingCardController : MonoBehaviour
         GameManager.Instance.OnLevelEndedEvent.RegisterEvent(gameObject, OnLevelEndedCallback);
 
         GameManager.Instance.OnLevelCompletedEvent.RegisterEvent(gameObject, OnLevelCompletedCallback);
+        GameManager.Instance.OnLevelFailedEvent.RegisterEvent(gameObject, OnLevelFailedCallback);
 
         GameManager.Instance.OnGameRunningEvent += OnGameRunningStateUpdatedCallback;
 
@@ -218,6 +236,7 @@ public class MatchingCardController : MonoBehaviour
         GameManager.Instance.OnLevelEndedEvent.UnregisterEvent(gameObject);
 
         GameManager.Instance.OnLevelCompletedEvent.UnregisterEvent(gameObject);
+        GameManager.Instance.OnLevelFailedEvent.UnregisterEvent(gameObject);
 
         GameManager.Instance.OnGameRunningEvent -= OnGameRunningStateUpdatedCallback;
 

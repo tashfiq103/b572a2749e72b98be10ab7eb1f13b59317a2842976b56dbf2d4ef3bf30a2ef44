@@ -84,6 +84,8 @@ public class SoundFXFeedback : MonoBehaviour
 
         _audioSource.Stop();
 
+        _audioSource.loop = audioData.loop;
+
         _audioSource.clip   = audioData.audioClip;
         _audioSource.volume = audioData.GetRandomVolume;
         _audioSource.pitch  = audioData.GetRandomPitch;

@@ -28,6 +28,8 @@ public class AudioData : ScriptableObject
 
     public AudioClip audioClip;
 
+    public bool loop = false;
+
     [Space(20)]
     [Range(0f, 1)]
     public float volumeMin = 1f;
