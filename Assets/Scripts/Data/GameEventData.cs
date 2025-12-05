@@ -52,6 +52,9 @@ public class GameEventData : ScriptableObject
 
     public void TriggerEvent()
     {
+        #if UNITY_EDITOR
+        Debug.Log($"EventTriggered : {name}");
+        #endif
         foreach(var pair in _eventDictionary)
         {
             pair.Value?.Invoke();

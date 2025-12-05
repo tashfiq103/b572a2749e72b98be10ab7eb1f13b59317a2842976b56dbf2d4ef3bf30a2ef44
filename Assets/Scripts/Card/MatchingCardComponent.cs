@@ -23,6 +23,7 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
 
     public CardStates CardState{get; private set;} = CardStates.BackFaced;
     public MatchData CardMatchData{get; private set;}
+    public int CardMatchIndex{get; private set;}
 
 
     public event Action<CardStates> OnCardStateChangedEvent;
@@ -103,9 +104,10 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
 
     #region Public Callback
 
-    public void Initialize(MatchData cardMatchData)
+    public void Initialize(MatchData cardMatchData, int cardMatchIndex)
     {
         CardMatchData = cardMatchData;
+        CardMatchIndex = cardMatchIndex;
 
         cardMeshRenderer.material.SetTexture(
             _hashKey_Shader_BaseMap,

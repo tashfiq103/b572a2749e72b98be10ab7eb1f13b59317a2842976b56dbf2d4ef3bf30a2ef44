@@ -43,6 +43,12 @@ public class MatchingCardAnimationEventListener : MonoBehaviour
     public void OnUnflipAnimationComplete()
     {
         _matchingCardController.OnUnflippedEndedEvent?.Invoke(matchingCardComponent);
+
+        if(!GameManager.Instance.IsGameRunning
+        && matchingCardComponent.CardMatchIndex == DataManager.Instance.LevelDataContainerReference.CurrentLevelDataReference.GridDatas.Length -1)
+        {
+            GameManager.Instance.OnLevelStartedEvent.TriggerEvent();
+        }
     }
 
     public void OnDissolveAnimationStart()

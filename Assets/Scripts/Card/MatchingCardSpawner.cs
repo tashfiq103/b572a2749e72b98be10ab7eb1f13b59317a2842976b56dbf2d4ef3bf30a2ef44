@@ -42,7 +42,8 @@ public class MatchingCardSpawner : MonoBehaviour
 
                     int dataIndex = row * levelData.Column + column;
                     cardObject.GetComponent<MatchingCardComponent>().Initialize(
-                        dataManager.LevelDataContainerReference.CurrentLevelDataReference.GridDatas[dataIndex].MatchDataReference
+                        dataManager.LevelDataContainerReference.CurrentLevelDataReference.GridDatas[dataIndex].MatchDataReference,
+                        dataIndex
                     );
 
                     yield return null;
