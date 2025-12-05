@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matchItemName: Apple
   matchItemSprite: {fileID: 21300000, guid: a60996e85b85b40ffb9657839272f56d, type: 3}
+  iconSize: 0.8
+  frontColorBottom: {r: 1, g: 0.22352941, b: 0, a: 1}
+  frontColorTop: {r: 0, g: 1, b: 0.203542, a: 1}
+  dissolveColor: {r: 2.828427, g: 1.3864839, b: 0, a: 1}

@@ -43,7 +43,13 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
 
 
     private static readonly int _hashKey_Shader_BaseMap = Shader.PropertyToID("_BaseMap");
+    private static readonly int _hashKey_Shader_BaseMapSize = Shader.PropertyToID("_BaseMapSize");
+
+    private static readonly int _hashKey_Shader_FrontFaceColor01 = Shader.PropertyToID("_FrontFaceColor01");
+    private static readonly int _hashKey_Shader_FrontFaceColor02 = Shader.PropertyToID("_FrontFaceColor02");
+
     private static readonly int _hasKey_Shader_DissolveProgress = Shader.PropertyToID("_Dissolve");
+    private static readonly int _hashKey_Shader_DissolveColor = Shader.PropertyToID("_DissolveColor");
 
     #endregion
 
@@ -112,6 +118,27 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
         cardMeshRenderer.material.SetTexture(
             _hashKey_Shader_BaseMap,
             CardMatchData.matchItemSprite.texture
+        );
+
+        cardMeshRenderer.material.SetFloat(
+            _hashKey_Shader_BaseMapSize,
+            1f - CardMatchData.iconSize
+        );
+
+
+        cardMeshRenderer.material.SetColor(
+            _hashKey_Shader_FrontFaceColor01,
+            CardMatchData.frontColorBottom
+        );
+
+        cardMeshRenderer.material.SetColor(
+            _hashKey_Shader_FrontFaceColor02,
+            CardMatchData.frontColorTop
+        );
+
+        cardMeshRenderer.material.SetColor(
+            _hashKey_Shader_DissolveColor,
+            CardMatchData.dissolveColor
         );
     }
     

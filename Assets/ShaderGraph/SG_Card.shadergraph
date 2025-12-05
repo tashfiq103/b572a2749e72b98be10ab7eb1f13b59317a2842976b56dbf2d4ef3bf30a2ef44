@@ -4202,8 +4202,8 @@
     "m_ObjectId": "31a5a1b1337c4a5dba80e647b4d842ef",
     "m_Title": "FrontFaceColor",
     "m_Position": {
-        "x": -5191.0,
-        "y": -4058.000244140625
+        "x": -5243.49951171875,
+        "y": -4058.0
     }
 }
 
@@ -9367,10 +9367,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -4873.5,
-            "y": -3428.0,
-            "width": 145.5,
-            "height": 34.0
+            "x": -5218.5,
+            "y": -3437.0,
+            "width": 145.50048828125,
+            "height": 33.999755859375
         }
     },
     "m_Slots": [
