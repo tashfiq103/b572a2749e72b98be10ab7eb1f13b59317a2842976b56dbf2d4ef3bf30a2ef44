@@ -104,30 +104,35 @@ public class MatchingCardController : MonoBehaviour
     {
         if(_flippedCardsStack.Count > 0)
         {
-            if(_flippedCardsStack.Peek().CardMatchData == value.CardMatchData)
+            if(_flippedCardsStack.Peek() != value)
             {
-                value.TryDissolve(OnDissolvingEvent, OnDissolvingCompletedEvent);
-                _flippedCardsStack.Pop().TryDissolve(OnDissolvingEvent, OnDissolvingCompletedEvent);
-
-                Score += 2 * ComboStack;
-                OnScoreUpdatedEvent?.Invoke(Score);
-                ComboStack++;
-            }
-            else
-            {
-                value.TryUnflip();
-                while(_flippedCardsStack.Count > 0)
+                if(_flippedCardsStack.Peek().CardMatchData == value.CardMatchData)
                 {
-                    _flippedCardsStack.Pop().TryUnflip();
+                    value.TryDissolve(OnDissolvingEvent, OnDissolvingCompletedEvent);
+                    _flippedCardsStack.Pop().TryDissolve(OnDissolvingEvent, OnDissolvingCompletedEvent);
+
+                    Score += 2 * ComboStack;
+                    OnScoreUpdatedEvent?.Invoke(Score);
+                    ComboStack++;
                 }
+                else
+                {
+                    value.TryUnflip();
+                    while(_flippedCardsStack.Count > 0)
+                    {
+                        _flippedCardsStack.Pop().TryUnflip();
+                    }
 
-                ComboStack = 1;
+                    ComboStack = 1;
+                }
+                OnComboStackUpdatedEvent?.Invoke(ComboStack);
             }
-
-            OnComboStackUpdatedEvent?.Invoke(ComboStack);
-        }else
+            
+        }
+        else
         {
-            _flippedCardsStack.Push(value);
+            if(!_flippedCardsStack.Contains(value))
+                _flippedCardsStack.Push(value);
         }
     }
 
@@ -138,7 +143,13 @@ public class MatchingCardController : MonoBehaviour
 
     private void OnUnflippedEndedCallback(MatchingCardComponent value)
     {
-        
+        if(_flippedCardsStack.Count > 0)
+        {
+            if(_flippedCardsStack.Peek() == value)
+            {
+                _flippedCardsStack.Pop();
+            }
+        }
     }
 
 
