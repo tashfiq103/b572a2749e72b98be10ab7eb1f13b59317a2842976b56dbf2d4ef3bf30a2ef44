@@ -30,7 +30,8 @@ public class MatchingCardController : MonoBehaviour
 
     #region Private Variables
 
-    private bool _isGameRunning;
+    private bool _isTimerCanRun;
+    private int _numberOfCardMatched;
 
     private Stack<MatchingCardComponent> _flippedCardsStack = new Stack<MatchingCardComponent>();
 
@@ -39,23 +40,59 @@ public class MatchingCardController : MonoBehaviour
 
     #endregion
 
-    #region Internal Callback
+    #region Internal Method
 
-    private void OnLevelStartedCallback()
+    private IEnumerator GameTimer()
     {
-        Score       = 0;
-        ComboStack  = 1;
-
+        yield return new WaitUntil(()=>
+        {
+           return GameManager.Instance.IsGameRunning;
+        });
 
         _levelDuration                      = DataManager.Instance.LevelDataContainerReference.CurrentLevelDataReference.levelDuration;
         _remainingTimeToCompleteTheLevel    = _levelDuration;
 
-        _isGameRunning = true;
+        do
+        {
+            float deltaTime = Time.deltaTime;
+            _remainingTimeToCompleteTheLevel -= deltaTime;
+            _remainingTimeToCompleteTheLevel = Mathf.Clamp(_remainingTimeToCompleteTheLevel, 0, _levelDuration);
+
+            OnTimerUpdatedEvent?.Invoke(_remainingTimeToCompleteTheLevel, _levelDuration);
+
+            if(_remainingTimeToCompleteTheLevel <= 0)
+            {
+                GameManager.Instance.OnLevelEndedEvent?.TriggerEvent();
+                GameManager.Instance.OnLevelFailedEvent?.TriggerEvent();
+            }
+
+            yield return new WaitForSeconds(deltaTime);
+
+        }while(_isTimerCanRun);
+    }
+
+    #endregion
+
+    #region Internal Callback
+
+    private void OnGameRunningStateUpdatedCallback(bool value)
+    {
+        _isTimerCanRun = value;
+    }
+
+    private void OnLevelStartedCallback()
+    {
+        Score                   = 0;
+        ComboStack              = 1;
+
+        _numberOfCardMatched    = 0;        
+
+        StartCoroutine(GameTimer());
     }
 
     private void OnLevelEndedCallback()
     {
-        _isGameRunning = false;
+        
     }
 
     private void OnFlippedStartedCallback(MatchingCardComponent value)
@@ -107,7 +144,13 @@ public class MatchingCardController : MonoBehaviour
 
     private void OnDissolveStartedCallback(MatchingCardComponent value)
     {
-        
+        _numberOfCardMatched++;
+        if(GameManager.Instance.IsGameRunning
+        && _numberOfCardMatched == DataManager.Instance.LevelDataContainerReference.CurrentLevelDataReference.GridDatas.Length)
+        {
+            GameManager.Instance.OnLevelEndedEvent.TriggerEvent();
+            GameManager.Instance.OnLevelCompletedEvent.TriggerEvent();
+        }
     }
 
     private void OnDissolvingCallback(MatchingCardComponent value, float progression)
@@ -123,10 +166,6 @@ public class MatchingCardController : MonoBehaviour
 
     #endregion
 
-    #region Private Variables
-
-
-    #endregion
 
     #region Unity Method
 
@@ -134,6 +173,8 @@ public class MatchingCardController : MonoBehaviour
     {
         GameManager.Instance.OnLevelStartedEvent.RegisterEvent(gameObject, OnLevelStartedCallback);
         GameManager.Instance.OnLevelEndedEvent.RegisterEvent(gameObject, OnLevelEndedCallback);
+
+        GameManager.Instance.OnGameRunningEvent += OnGameRunningStateUpdatedCallback;
 
         OnFlippedStartedEvent += OnFlippedStartedCallback;
         OnFlippedEndedEvent += OnFlippedEndedCallback;
@@ -146,28 +187,12 @@ public class MatchingCardController : MonoBehaviour
         OnDissolvingCompletedEvent += OnDissolvingCompletedCallback;
     }
 
-    private void Update()
-    {
-        if(!_isGameRunning)
-            return;
-
-        float deltaTime = Time.deltaTime;
-        _remainingTimeToCompleteTheLevel -= deltaTime;
-        _remainingTimeToCompleteTheLevel = Mathf.Clamp(_remainingTimeToCompleteTheLevel, 0, _levelDuration);
-
-        OnTimerUpdatedEvent?.Invoke(_remainingTimeToCompleteTheLevel, _levelDuration);
-
-        if(_remainingTimeToCompleteTheLevel <= 0)
-        {
-            GameManager.Instance.OnLevelEndedEvent?.TriggerEvent();
-            GameManager.Instance.OnLevelFailedEvent?.TriggerEvent();
-        }
-    }
-
     private void OnDisable()
     {
         GameManager.Instance.OnLevelStartedEvent.UnregisterEvent(gameObject);
         GameManager.Instance.OnLevelEndedEvent.UnregisterEvent(gameObject);
+
+        GameManager.Instance.OnGameRunningEvent -= OnGameRunningStateUpdatedCallback;
 
         OnFlippedStartedEvent -= OnFlippedStartedCallback;
         OnFlippedEndedEvent -= OnFlippedEndedCallback;
