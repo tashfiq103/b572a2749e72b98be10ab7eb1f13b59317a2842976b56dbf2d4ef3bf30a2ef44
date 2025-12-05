@@ -17,7 +17,7 @@ public class UICTimerHUD : UICanvas
     private void OnTimerUpdatedCallback(float reminder, float duration)
     {
         int minutes = Mathf.FloorToInt(reminder / 60f);
-        int seconds = Mathf.FloorToInt(reminder % 60f);
+        int seconds = Mathf.CeilToInt(reminder % 60f);
         timeText.text = $"{minutes:00}:{seconds:00}";
 
         timeClockImage.fillAmount = reminder / duration;

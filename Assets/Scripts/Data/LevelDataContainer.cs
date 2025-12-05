@@ -55,15 +55,13 @@ public class LevelDataContainer : ScriptableObject
         );
     }
 
-    public void LoadNextLevel()
+    public void UpdateNextLevelIndex()
     {
         int nextLevelIndex = LevelIndex + 1;
         if (nextLevelIndex >= levelDatas.Length)
             nextLevelIndex = 0;
 
         PlayerPrefs.SetInt(LEVEL_INDEX_KEY, nextLevelIndex);
-
-        LoadLevel();
     }
 
     #endregion

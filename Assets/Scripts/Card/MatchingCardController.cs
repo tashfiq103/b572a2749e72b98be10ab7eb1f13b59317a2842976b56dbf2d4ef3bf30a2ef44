@@ -98,6 +98,11 @@ public class MatchingCardController : MonoBehaviour
         
     }
 
+    private void OnLevelCompletedCallback()
+    {
+        DataManager.Instance.LevelDataContainerReference.UpdateNextLevelIndex();
+    }
+
     private void OnFlippedStartedCallback(MatchingCardComponent value)
     {
         
@@ -192,6 +197,8 @@ public class MatchingCardController : MonoBehaviour
         GameManager.Instance.OnLevelStartedEvent.RegisterEvent(gameObject, OnLevelStartedCallback);
         GameManager.Instance.OnLevelEndedEvent.RegisterEvent(gameObject, OnLevelEndedCallback);
 
+        GameManager.Instance.OnLevelCompletedEvent.RegisterEvent(gameObject, OnLevelCompletedCallback);
+
         GameManager.Instance.OnGameRunningEvent += OnGameRunningStateUpdatedCallback;
 
         OnFlippedStartedEvent += OnFlippedStartedCallback;
@@ -209,6 +216,8 @@ public class MatchingCardController : MonoBehaviour
     {
         GameManager.Instance.OnLevelStartedEvent.UnregisterEvent(gameObject);
         GameManager.Instance.OnLevelEndedEvent.UnregisterEvent(gameObject);
+
+        GameManager.Instance.OnLevelCompletedEvent.UnregisterEvent(gameObject);
 
         GameManager.Instance.OnGameRunningEvent -= OnGameRunningStateUpdatedCallback;
 
