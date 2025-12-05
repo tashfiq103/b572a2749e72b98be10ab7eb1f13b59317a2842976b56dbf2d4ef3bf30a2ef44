@@ -35,8 +35,8 @@ public class MatchingBoardCamera : MonoBehaviour
     {
         float orthoSize = 0;
 
-        int rows = GameManager.Instance.LevelContainerDataReference.CurrentLevelDataReference.Row;
-        int columns = GameManager.Instance.LevelContainerDataReference.CurrentLevelDataReference.Column;
+        int rows = DataManager.Instance.LevelDataContainerReference.CurrentLevelDataReference.Row;
+        int columns = DataManager.Instance.LevelDataContainerReference.CurrentLevelDataReference.Column;
         
         float cellSizeX = GameManager.Instance.matchingCardSpawner.cardHorizontalSpacing;
         float cellSizeY = GameManager.Instance.matchingCardSpawner.cardVerticalSpacing;

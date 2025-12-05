@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UIButton : MonoBehaviour
+[RequireComponent(typeof(Button))]
+public abstract class UIButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+     #region Unity Callback
+
+    protected virtual void OnEnable()
     {
-        
+        GetComponent<Button>().onClick.AddListener(OnButtonPressedCallback);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void OnDisable()
     {
-        
+        GetComponent<Button>().onClick.RemoveListener(OnButtonPressedCallback);
     }
+
+    #endregion
+
+    #region Abstract Method
+
+    protected abstract void OnButtonPressedCallback();
+
+    #endregion
 }

@@ -47,7 +47,7 @@ public class MatchingCardController : MonoBehaviour
         ComboStack  = 1;
 
 
-        _levelDuration                      = GameManager.Instance.LevelContainerDataReference.CurrentLevelDataReference.levelDuration;
+        _levelDuration                      = DataManager.Instance.LevelDataContainerReference.CurrentLevelDataReference.levelDuration;
         _remainingTimeToCompleteTheLevel    = _levelDuration;
 
         _isGameRunning = true;

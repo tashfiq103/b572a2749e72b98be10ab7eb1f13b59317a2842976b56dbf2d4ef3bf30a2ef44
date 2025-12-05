@@ -21,8 +21,8 @@ public class MatchingCardSpawner : MonoBehaviour
     {
         IEnumerator SpawnProcess()
         {
-            GameManager gameManager = GameManager.Instance;
-            LevelData levelData = gameManager.LevelContainerDataReference.CurrentLevelDataReference;
+            DataManager dataManager = DataManager.Instance;
+            LevelData levelData = dataManager.LevelDataContainerReference.CurrentLevelDataReference;
             float rowPosition = ((levelData.Row - 1) * cardVerticalSpacing) / 2;
             for(int row = 0; row < levelData.Row; row++)
             {
@@ -42,7 +42,7 @@ public class MatchingCardSpawner : MonoBehaviour
 
                     int dataIndex = row * levelData.Column + column;
                     cardObject.GetComponent<MatchingCardComponent>().Initialize(
-                        gameManager.LevelContainerDataReference.CurrentLevelDataReference.GridDatas[dataIndex].MatchDataReference
+                        dataManager.LevelDataContainerReference.CurrentLevelDataReference.GridDatas[dataIndex].MatchDataReference
                     );
 
                     yield return null;

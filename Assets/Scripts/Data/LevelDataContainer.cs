@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelContainerData", menuName = "Data/LevelContainerData", order = 2)]
-public class LevelContainerData : ScriptableObject
+public class LevelDataContainer : ScriptableObject
 {
     #region Public Variables
 
@@ -51,7 +51,6 @@ public class LevelContainerData : ScriptableObject
             OnSceneLoaded: () =>
             {
                 GameManager.Instance.OnLevelDataLoadedEvent.TriggerEvent();
-                GameManager.Instance.OnLevelStartedEvent.TriggerEvent();
             }
         );
     }
@@ -66,12 +65,6 @@ public class LevelContainerData : ScriptableObject
 
         LoadLevel();
     }
-
-    public void RestartLevel()
-    {
-        LoadLevel();
-    }
-
 
     #endregion
     
