@@ -40,5 +40,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        //Before deplying menu
+        OnLevelDataLoadedEvent.TriggerEvent();
+        OnLevelStartedEvent.TriggerEvent();
+    }
+
     #endregion
 }
