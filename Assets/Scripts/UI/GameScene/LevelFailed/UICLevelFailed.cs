@@ -1,11 +1,20 @@
 using UnityEngine;
+using TMPro;
 
 public class UICLevelFailed : UICanvas
 {
+    #region Public Variables
+
+    public TextMeshProUGUI scoreText;
+
+    #endregion
+
+
    #region Internal Callback
 
     private void OnLevelFailedCallback()
     {
+        scoreText.text = GameManager.Instance.matchingCardController.Score.ToString();
         Show();
     }
 

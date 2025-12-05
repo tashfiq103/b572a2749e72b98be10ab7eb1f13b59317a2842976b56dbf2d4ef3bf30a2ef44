@@ -1,11 +1,19 @@
 using UnityEngine;
+using TMPro;
 
 public class UICLevelComplete : UICanvas
 {
+    #region Public Variables
+
+    public TextMeshProUGUI scoreText;
+
+    #endregion
+
     #region Internal Callback
 
     private void OnLevelCompleteCallback()
     {
+        scoreText.text = GameManager.Instance.matchingCardController.Score.ToString();
         Show();
     }
 
