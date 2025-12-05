@@ -3,12 +3,12 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 
-[CustomEditor(typeof(SoundFXPlayer))]
+[CustomEditor(typeof(SoundFXFeedback))]
 public class SoundFXPlayerEditor : Editor
 {
     #region Variables
 
-    private SoundFXPlayer _reference;
+    private SoundFXFeedback _reference;
 
     #endregion
 
@@ -16,7 +16,7 @@ public class SoundFXPlayerEditor : Editor
 
     private void OnEnable()
     {
-        _reference = (SoundFXPlayer) target;
+        _reference = (SoundFXFeedback) target;
         if(_reference == null)
             return;
     }
@@ -49,7 +49,7 @@ public class SoundFXPlayerEditor : Editor
 
 [RequireComponent(typeof(AudioSource))]
 [ExecuteAlways]
-public class SoundFXPlayer : MonoBehaviour
+public class SoundFXFeedback : MonoBehaviour
 {
     #region Public Variables
 

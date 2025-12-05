@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AudioData_CardUnflip
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 874ad1f40885e4b31af70973cc2a9602, type: 3}
-  volumeMin: 0.9
-  volumeMax: 1
+  volumeMin: 0.45
+  volumeMax: 0.55
   pitchMin: 0.75
   pitchMax: 1.25

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8429b80588c724616aa402d62acb5290, type: 3}
-  m_Name: AudioData_CardFlip
+  m_Name: AudioData_CardMatched
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: d171d293aa5b94787b8061c60e5ecbc9, type: 3}
-  volumeMin: 0.45
-  volumeMax: 0.55
+  audioClip: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
+  volumeMin: 0.9
+  volumeMax: 1
   pitchMin: 0.75
   pitchMax: 1.25

@@ -26,6 +26,9 @@ public class MatchingCardController : MonoBehaviour
     public event Action<int> OnComboStackUpdatedEvent;
     public event Action<float, float> OnTimerUpdatedEvent;
 
+    public SoundFXFeedback soundFXOnCardMatched;
+    public SoundFXFeedback soundFXOnCardMissMatched;
+
     #endregion
 
     #region Private Variables
@@ -114,6 +117,8 @@ public class MatchingCardController : MonoBehaviour
                     Score += 2 * ComboStack;
                     OnScoreUpdatedEvent?.Invoke(Score);
                     ComboStack++;
+
+                    soundFXOnCardMatched.TryPlaySound();
                 }
                 else
                 {
@@ -124,6 +129,8 @@ public class MatchingCardController : MonoBehaviour
                     }
 
                     ComboStack = 1;
+
+                    soundFXOnCardMissMatched.TryPlaySound();
                 }
                 OnComboStackUpdatedEvent?.Invoke(ComboStack);
             }

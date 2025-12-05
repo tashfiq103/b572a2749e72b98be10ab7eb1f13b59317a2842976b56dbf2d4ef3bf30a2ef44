@@ -34,8 +34,8 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
     public Animator cardAnimator;
 
     [Header("SoundFX Reference")]
-    public SoundFXPlayer cardFlipSoundFX;
-    public SoundFXPlayer cardUnflipSoundFX;
+    public SoundFXFeedback cardFlipSoundFX;
+    public SoundFXFeedback cardUnflipSoundFX;
 
     #endregion
 
@@ -197,7 +197,6 @@ public class MatchingCardComponent : MonoBehaviour, IPointerClickHandler
     {
         if(CardState == CardStates.FrontFaced)
         {
-            Debug.Log("Unflipping");
             ChangeCardState(CardStates.BackFaced);
             return true;
         }
