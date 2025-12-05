@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd295340073f3436a8be8c91255e49cf, type: 3}
-  m_Name: MatchData_Fruits02_Strawberry
+  m_Name: MatchData_Fruits04_Avocado
   m_EditorClassIdentifier: 
-  matchItemName: Strawberry
-  matchItemSprite: {fileID: 21300000, guid: 395b9a7eaa5164c08a96794b94e802be, type: 3}
+  matchItemName: Avocado
+  matchItemSprite: {fileID: 21300000, guid: 36b7b7f5b0df84432bdffa8768c344b6, type: 3}
   iconSize: 0.8
-  frontColorBottom: {r: 1, g: 0.22352941, b: 0, a: 1}
-  frontColorTop: {r: 1, g: 0, b: 0.70607996, a: 1}
-  dissolveColor: {r: 2.828427, g: 1.3864839, b: 0, a: 1}
+  frontColorBottom: {r: 0.3764706, g: 0.5686275, b: 0, a: 1}
+  frontColorTop: {r: 0.8627451, g: 0.8901961, b: 0.3647059, a: 1}
+  dissolveColor: {r: 4.203033, g: 2.0174558, b: 0.30261838, a: 1}

@@ -35,9 +35,9 @@ MonoBehaviour:
   levelScene:
     scenePath: Assets/Scenes/GameScene01.unity
     sceneName: GameScene01
-  levelDuration: 30
+  levelDuration: 12
   _row: 2
   _column: 3
   _matchDatas:
   - {fileID: 11400000, guid: 05e73b850fb084cca83423e00da79ddf, type: 2}
-  - {fileID: 11400000, guid: ab314c74b06fd469889e889b9c298735, type: 2}
+  - {fileID: 11400000, guid: ca68f6381253044ed940867ab171033b, type: 2}
