@@ -229,9 +229,11 @@ public class LevelData : EnumData
 
     [SerializeField, HideInInspector] private GridData[] _gridDatas;
 
+    [Header("Core")]
     public SceneReference levelScene;
+    public float levelDuration = 30;
 
-    [Space(25)]
+    [Header("Grid")]
     [Range(2, 15)]
     [SerializeField] private int _row = 2;
     [Range(2, 15)]

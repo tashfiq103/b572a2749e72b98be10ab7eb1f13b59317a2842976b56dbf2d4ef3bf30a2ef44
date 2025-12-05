@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class MatchingCardController : MonoBehaviour
 {
@@ -23,12 +24,18 @@ public class MatchingCardController : MonoBehaviour
 
     public event Action<int> OnScoreUpdatedEvent;
     public event Action<int> OnComboStackUpdatedEvent;
+    public event Action<float, float> OnTimerUpdatedEvent;
 
     #endregion
 
     #region Private Variables
 
+    private bool _isGameRunning;
+
     private Stack<MatchingCardComponent> _flippedCardsStack = new Stack<MatchingCardComponent>();
+
+    private float _levelDuration;
+    private float _remainingTimeToCompleteTheLevel;
 
     #endregion
 
@@ -38,11 +45,17 @@ public class MatchingCardController : MonoBehaviour
     {
         Score       = 0;
         ComboStack  = 1;
+
+
+        _levelDuration                      = GameManager.Instance.LevelContainerDataReference.CurrentLevelDataReference.levelDuration;
+        _remainingTimeToCompleteTheLevel    = _levelDuration;
+
+        _isGameRunning = true;
     }
 
     private void OnLevelEndedCallback()
     {
-        
+        _isGameRunning = false;
     }
 
     private void OnFlippedStartedCallback(MatchingCardComponent value)
@@ -131,6 +144,24 @@ public class MatchingCardController : MonoBehaviour
         OnDissolveStartedEvent += OnDissolveStartedCallback;
         OnDissolvingEvent += OnDissolvingCallback;
         OnDissolvingCompletedEvent += OnDissolvingCompletedCallback;
+    }
+
+    private void Update()
+    {
+        if(!_isGameRunning)
+            return;
+
+        float deltaTime = Time.deltaTime;
+        _remainingTimeToCompleteTheLevel -= deltaTime;
+        _remainingTimeToCompleteTheLevel = Mathf.Clamp(_remainingTimeToCompleteTheLevel, 0, _levelDuration);
+
+        OnTimerUpdatedEvent?.Invoke(_remainingTimeToCompleteTheLevel, _levelDuration);
+
+        if(_remainingTimeToCompleteTheLevel <= 0)
+        {
+            GameManager.Instance.OnLevelEndedEvent?.TriggerEvent();
+            GameManager.Instance.OnLevelFailedEvent?.TriggerEvent();
+        }
     }
 
     private void OnDisable()
